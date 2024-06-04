@@ -115,7 +115,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\AuditoriumContext.cs" />
     <Compile Include="Classes\Common\Connection.cs" />
+    <Compile Include="Classes\EquipmentContext.cs" />
+    <Compile Include="Classes\EquipmentStatusContext.cs" />
+    <Compile Include="Classes\UserConext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -154,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\uchot_oborud.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

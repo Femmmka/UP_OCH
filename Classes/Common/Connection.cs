@@ -20,7 +20,7 @@ namespace uchot.Classes.Common
         {
             return new MySqlCommand(SQL, connection).ExecuteReader();
         }
-        public static void ConnectionClose(MySqlConnection connection)
+        public static void CloseConnection(MySqlConnection connection)
         {
             connection.Close();
             MySqlConnection.ClearPool(connection);
