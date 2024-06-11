@@ -9,52 +9,76 @@ using uchot.Model;
 
 namespace uchot.Classes
 {
-    public class EquipmentContext:Equipment
+    public class EquipmentContext : Equipment
     {
-        public EquipmentContext(int id, string name, string photo, int inventory_number, int auditorium_id, int responsible_user_id, decimal cost, int status_id) : base(id, name, photo, inventory_number, auditorium_id, responsible_user_id, cost, status_id) { }
+        public EquipmentContext(int Id, int Id_user, int Id_classroom, int Id_status, string Name, byte[] Photo, string Code, int Price)
+            : base(Id, Id_user, Id_classroom, Id_status, Name, Photo, Code, Price) { }
+        public EquipmentContext() : base() { }
         public static List<EquipmentContext> Select()
         {
-            List<EquipmentContext> allEquipment = new List<EquipmentContext>();
-            string sql = "SELECT * FROM `Equipment`";
+            List<EquipmentContext> AllEquipments = new List<EquipmentContext>();
+            string SQL = "SELECT * FROM `Equipment`;";
             MySqlConnection connection = Connection.OpenConnection();
-            MySqlDataReader data = Connection.Query(sql, connection);
-            while (data.Read())
+            MySqlDataReader Data = Connection.Query(SQL, connection);
+            while (Data.Read())
             {
-                allEquipment.Add(new EquipmentContext(
-                    data.GetInt32(0),
-                    data.GetString(1),
-                    data.GetString(2),
-                    data.GetInt32(3),
-                    data.GetInt32(4),
-                    data.GetInt32(5),
-                    data.GetInt32(6),
-                    data.GetInt32(7)
-                   ));
+                EquipmentContext equipment = new EquipmentContext();
+                equipment.Id = Data.GetInt32(0);
+                equipment.Id_user = Data.GetInt32(1);
+                equipment.Id_classroom = Data.GetInt32(2);
+                equipment.Id_status = Data.GetInt32(3);
+                equipment.Name = Data.GetString(4);
+                if (!Data.IsDBNull(5))
+                {
+                    equipment.Photo = new byte[64 * 1024];
+                    Data.GetBytes(5, 0, equipment.Photo, 0, equipment.Photo.Length);
+                }
+                equipment.Code = Data.GetString(6);
+                equipment.Price = Data.GetInt32(7);
+                AllEquipments.Add(equipment);
             }
             Connection.CloseConnection(connection);
-            return allEquipment;
+            return AllEquipments;
         }
         public void Add()
         {
-            string sql = $"INSERT INTO `Equipment`(`name`, `photo`, `inventory_number`, `auditorium_id`, `responsible_user_id`, `cost`, `status_id`) VALUES ('{this.name}','{this.photo}','{this.inventory_number}','{this.auditorium_id}','{this.responsible_user_id}','{this.cost}','{this.status_id}')";
+            string SQL = "INSERT INTO `Equipment`(`Id_user`, `Id_classroom`, `Id_status`, `Name`, `Photo`, `Code`, `Price`) " +
+                        " VALUES " +
+                            $"('{this.Id_user}', " +
+                            $"'{this.Id_classroom}', " +
+                            $"'{this.Id_status}', " +
+                            $"'{this.Name}'," +
+                            $"'{this.Photo}'," +
+                            $"'{this.Code}'," +
+                            $"'{this.Price}')";
             MySqlConnection connection = Connection.OpenConnection();
-            Connection.Query(sql, connection);
+            Connection.Query(SQL, connection);
             Connection.CloseConnection(connection);
         }
         public void Update()
         {
-            string sql = $"UPDATE `Equipment` SET `name`='{this.name}',`photo`='{this.photo}',`inventory_number`='{this.inventory_number}',`auditorium_id`='{this.auditorium_id}',`responsible_user_id`='{this.responsible_user_id}',`cost`='{this.cost}',`status_id`='{this.status_id}' WHERE `id`='{this.id}'";
+            string SQL = "UPDATE " +
+                            "`Equipment` " +
+                        "SET " +
+                            $"`Id_user`='{this.Id_user}', " +
+                            $"`Id_classroom`='{this.Id_classroom}', " +
+                            $"`Id_status`='{this.Id_status}', " +
+                            $"`Name`='{this.Name}', " +
+                            $"`Photo`='{this.Photo}', " +
+                            $"`Code`='{this.Code}', " +
+                            $"`Price`='{this.Price}' " +
+                        " WHERE " +
+                            $"`Id`='{this.Id}';";
             MySqlConnection connection = Connection.OpenConnection();
-            Connection.Query(sql, connection);
+            Connection.Query(SQL, connection);
             Connection.CloseConnection(connection);
         }
         public void Delete()
         {
-            string sql = $"DELETE FROM `Equipment` WHERE `id` = {this.id}";
+            string SQL = $"DELETE FROM `Equipment` WHERE `Id`='{this.Id}'";
             MySqlConnection connection = Connection.OpenConnection();
-            Connection.Query(sql, connection);
+            Connection.Query(SQL, connection);
             Connection.CloseConnection(connection);
         }
     }
 }
-   

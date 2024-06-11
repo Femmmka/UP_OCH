@@ -115,21 +115,49 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\AuditoriumContext.cs" />
+    <Compile Include="Classes\ClassroomContext.cs" />
+    <Compile Include="Classes\Common\CheckRegex.cs" />
     <Compile Include="Classes\Common\Connection.cs" />
     <Compile Include="Classes\EquipmentContext.cs" />
-    <Compile Include="Classes\EquipmentStatusContext.cs" />
-    <Compile Include="Classes\UserConext.cs" />
+    <Compile Include="Classes\LoginContext.cs" />
+    <Compile Include="Classes\RolesContext.cs" />
+    <Compile Include="Classes\StatusContext.cs" />
+    <Compile Include="Classes\StoryContext.cs" />
+    <Compile Include="Classes\UsersContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Classroom\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Classroom\Items\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Classroom\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Auditorium.cs" />
+    <Compile Include="Model\Classroom.cs" />
     <Compile Include="Model\Equipment.cs" />
-    <Compile Include="Model\EquipmentStatus.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Login.cs" />
+    <Compile Include="Model\Roles.cs" />
+    <Compile Include="Model\Status.cs" />
+    <Compile Include="Model\Story.cs" />
+    <Compile Include="Model\Users.cs" />
+    <Compile Include="Pages\Classroom\Add.xaml.cs">
+      <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Classroom\Items\Item.xaml.cs">
+      <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Classroom\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -156,9 +184,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Image\uchot_oborud.png" />
   </ItemGroup>
